@@ -107,7 +107,7 @@ class Ball(Components):
             case Settings.HORIZONTAL:
                 self.speed_x *= -1
 
-    def hit(self, item: Union[Brick, Paddle]):
+    def has_hit(self, item: Union[Brick, Paddle]):
         """
         Detects collisions with Paddle or Brick.
         Returns True if a collision occurred.
