@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class Settings(Enum):
     """
     Global game configuration values used throughout the project.
@@ -15,6 +16,12 @@ class Settings(Enum):
     # Bounce axis identifiers
     HORIZONTAL = 1
     VERTICAL = 2
+
+    # Collision sides
+    TOP = 1111
+    BOTTOM = 1112
+    LEFT = 1113
+    RIGHT = 1114
 
     # Ball properties
     COLLISION_THRESHOLD = 5

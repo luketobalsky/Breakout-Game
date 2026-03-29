@@ -22,7 +22,7 @@ The Ball class interacts closely with:
 This module is part of the core gameplay mechanics and is used by
 the main game loop to update and draw the ball each frame.
 """
-#Contributor: Baba Diawara
+# Contributor: Baba Diawara
 
 from typing import Union
 
@@ -57,7 +57,9 @@ class Ball(Components):
             speed_x (int): Horizontal movement speed.
             speed_y (int): Vertical movement speed.
             game_over (int): Game state flag (0 = running, -1 = ball lost).
+            collision_side (Settings): records the side of the target hit by the ball
         """
+
     def __init__(self, x, y):
         super().__init__(x - Settings.RADIUS.value, y,
                          Settings.RADIUS.value * 2, Settings.RADIUS.value * 2)
@@ -70,6 +72,8 @@ class Ball(Components):
         self.speed_y = -4
         # Game state
         self.game_over = 0
+        # The side of the item the ball has hit
+        self.collision_side = None
 
     def move(self):
         """
@@ -120,6 +124,7 @@ class Ball(Components):
                 # Ball hits top of paddle while moving downward
                 if abs(self.frame.bottom - item.frame.top) < Settings.COLLISION_THRESHOLD.value \
                         and self.speed_y > 0:
+                    self.collision_side = Settings.TOP
                     return True
 
         # Brick collision
@@ -129,19 +134,23 @@ class Ball(Components):
                 # --- Vertical collisions ---
                 if abs(self.frame.bottom - item.frame.top) < Settings.COLLISION_THRESHOLD.value \
                         and self.speed_y > 0:
+                    self.collision_side = Settings.TOP
                     return True
 
                 if abs(self.frame.top - item.frame.bottom) < Settings.COLLISION_THRESHOLD.value \
                         and self.speed_y < 0:
+                    self.collision_side = Settings.BOTTOM
                     return True
 
                 # --- Horizontal collisions ---
                 if abs(self.frame.right - item.frame.left) < Settings.COLLISION_THRESHOLD.value \
                         and self.speed_x > 0:
+                    self.collision_side = Settings.LEFT
                     return True
 
                 if abs(self.frame.left - item.frame.right) < Settings.COLLISION_THRESHOLD.value \
                         and self.speed_x < 0:
+                    self.collision_side = Settings.RIGHT
                     return True
 
         return False  # No collision
