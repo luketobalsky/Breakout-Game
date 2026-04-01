@@ -6,7 +6,7 @@ import pygame
 from paddle import Paddle
 from ball import Ball
 #from brick import Brick
-#from brickgrid import BrickGrid
+from brickgrid import BrickGrid
 from scoremanager import ScoreManager
 from livesmanager import LivesManager
 #from collisionmanager import CollisionManager
@@ -33,6 +33,7 @@ class Game:
         self.ball = Ball(x // 2, y // 2)
         self.paddle = Paddle( x, y)
         self.paddle.using_mouse = True  #need this from biancas paddle.py, if not working make false to use keyboard or comment out
+        self.brick_grid = BrickGrid(x)
         self.scoremanager = ScoreManager()
         self.livesmanager = LivesManager()
         self.renderer = Renderer(self.screen)
@@ -70,11 +71,19 @@ class Game:
                 self.ball.bounce(Settings.VERTICAL)
                 self.ball.rect.bottom = self.paddle.rect.top
                 
+            #Check for collision with bricks
+            for brick in self.brick_grid.bricks_array:
+                if brick.active and self.ball.has_hit(brick):
+                    brick.destroy()
+                    self.scoremanager.add(10) # Moved here to update score only when bricks are destroyed
+                    self.ball.bounce(Settings.VERTICAL)
+
+                
                 #temporary for testing purposes **********************************************
-                self.scoremanager.add(10)
+               # self.scoremanager.add(10)
 
             #render all game objects
-            self.renderer.draw(self.ball, self.paddle, self.livesmanager, self.scoremanager)
+            self.renderer.draw(self.ball, self.paddle, self.brick_grid, self.livesmanager, self.scoremanager)
 
 if __name__ == "__main__":
     game = Game()
