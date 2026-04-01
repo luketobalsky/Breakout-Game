@@ -11,7 +11,7 @@ class Renderer:
         self.screen = screen
 
     #render components (via componenents draw() )
-    def draw(self, ball, paddle, livesmanager, scoremanager):         #make sure to add components here as needed
+    def draw(self, ball, paddle, brick_grid, livesmanager, scoremanager):         #make sure to add components here as needed
 
         #text renderer/drawer for pygame
         self.font = pygame.font.SysFont(None, 25)
@@ -22,6 +22,7 @@ class Renderer:
         #draw componenets to screen (again add componenets here as they are added done by yall)
         ball.draw(self.screen, (255, 255, 255))
         paddle.draw(self.screen)
+        brick_grid.draw(self.screen)
 
         #fetch and display current lives and scores
         lives = self.font.render("Lives: " + str(livesmanager.current_lives()), True, "white")
