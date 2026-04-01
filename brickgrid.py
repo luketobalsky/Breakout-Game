@@ -3,3 +3,4 @@
 import pygame
 
 class BrickGrid:
+    pass

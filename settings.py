@@ -28,5 +28,11 @@ class Settings(Enum):
     RADIUS = 10
 
     # Screen dimensions
-    SCREEN_X = 600
+    SCREEN_X = 1000
     SCREEN_Y = 600
+
+    #Lives 
+    LIVES = 3
+
+    #Game Speed (Frames)
+    FRAMES = 60

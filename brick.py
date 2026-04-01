@@ -4,3 +4,4 @@ import pygame
 from components import Components
 
 class Brick:
+    pass
