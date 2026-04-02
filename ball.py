@@ -24,11 +24,6 @@ the main game loop to update and draw the ball each rect.
 """
 # Contributor: Baba Diawara
 
-#**Note from luketobalsky** I had to change self.frame to self.rect     it seems like you were going for 
-#that anyways but to ensure consistency with ball (and the pygame docs) rect allows for a working prototype
-
-from typing import Union
-
 import pygame
 from pygame import Rect
 
@@ -114,7 +109,7 @@ class Ball(Components):
             case Settings.HORIZONTAL:
                 self.speed_x *= -1
 
-    def has_hit(self, item: Union[Brick, Paddle]):
+    def has_hit(self, item: Components):
         """
         Detects collisions with Paddle or Brick.
         Returns True if a collision occurred.
@@ -169,5 +164,6 @@ class Ball(Components):
             Settings.RADIUS.value
         )
 
+    # May need to be deleted.
     def update(self):
         pass
