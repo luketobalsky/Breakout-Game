@@ -8,16 +8,14 @@ This will serve as the main Breakout game launcher.
 """
 
 import pygame
-from paddle import Paddle
-from ball import Ball
-#from brick import Brick
-from brickgrid import BrickGrid
-from scoremanager import ScoreManager
-from livesmanager import LivesManager
-#from collisionmanager import CollisionManager
-#from difficultymanager import DifficultyManager
-from renderer import Renderer
-from settings import Settings
+from game.paddle import Paddle
+from game.ball import Ball
+from game.brickgrid import BrickGrid
+from game.scoremanager import ScoreManager
+from game.livesmanager import LivesManager
+#from game.difficultymanager import DifficultyManager
+from game.renderer import Renderer
+from game.settings import Settings
 
 #import settings
 x = Settings.SCREEN_X.value

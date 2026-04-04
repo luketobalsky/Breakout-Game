@@ -10,7 +10,7 @@ and it contains a method to destroy the brick.
 
 """
 import pygame
-from components import Components
+from game.components import Components
 
 
 class Brick(Components):

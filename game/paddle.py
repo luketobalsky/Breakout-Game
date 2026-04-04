@@ -10,7 +10,7 @@ It provides a method to allow the user to control the paddle via the mouse.
 """
 
 import pygame
-from components import Components
+from game.components import Components
 
 class Paddle(Components):
     def __init__(self, screen_width, screen_height):
