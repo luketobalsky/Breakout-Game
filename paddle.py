@@ -1,4 +1,14 @@
-#This will be the paddle class with the associated mechanics
+"""
+Group A: Breakout Game
+
+Contributor: Bianca Fouch
+
+Description:
+The following class initializes the paddle component.
+It contains a method to render the paddle to the screen.
+It provides a method to allow the user to control the paddle via the mouse.
+
+"""
 
 import pygame
 from components import Components
