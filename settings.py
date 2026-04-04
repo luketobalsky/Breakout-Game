@@ -1,9 +1,9 @@
-from enum import Enum
+"""
+Group A: Breakout Game
+Contributor: Baba Diawara
 
-
-class Settings(Enum):
-    """
-    Global game configuration values used throughout the project.
+Description:
+Global game configuration values used throughout the project.
 
     This Enum stores:
     - Axis identifiers for ball bounce logic
@@ -11,8 +11,13 @@ class Settings(Enum):
     - Screen dimensions
 
     All values are accessed using Settings.NAME.value
-    """
+    
+"""
 
+from enum import Enum
+
+
+class Settings(Enum):
     # Bounce axis identifiers
     HORIZONTAL = 1
     VERTICAL = 2
