@@ -1,5 +1,8 @@
 """
-ball.py
+Group A: BreakoutGame
+Contributor: Baba Diawara
+
+Description:
 
 This module defines the Ball class used in the breakout-style game.
 The Ball is responsible for handling its own movement, detecting
@@ -22,7 +25,6 @@ The Ball class interacts closely with:
 This module is part of the core gameplay mechanics and is used by
 the main game loop to update and draw the ball each rect.
 """
-# Contributor: Baba Diawara
 
 import pygame
 from pygame import Rect
