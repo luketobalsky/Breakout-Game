@@ -1,5 +1,5 @@
 """
-Group A: BreakoutGame
+Group A: Breakout Game
 Contributor: Baba Diawara
 
 Description:
