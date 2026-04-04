@@ -1,7 +1,13 @@
-# This will be the renderer class which will set up the GUI for the game
+"""
+Group A: Breakout Game
 
-# Contributor: Lucas Tobalsky
+Contributor: Lucas Tobalsky
 
+Description:
+The following class initializes the renderer component.
+This will set up the GUI for the game
+
+"""
 import pygame
 
 class Renderer:
