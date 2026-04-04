@@ -3,7 +3,7 @@
 import pygame
 from components import Components
 
-class Paddle:
+class Paddle(Components):
     def __init__(self, screen_width, screen_height):
         self.width = 100
         self.height = 15
