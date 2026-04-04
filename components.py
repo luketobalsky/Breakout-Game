@@ -1,6 +1,5 @@
 """
 Group A: Breakout Game
-
 Contributor: Luis Orellana
 
 Description:
