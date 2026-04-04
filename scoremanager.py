@@ -1,8 +1,11 @@
-# This will be the score manager class which will track the players score
+"""
+Group A: Breakout Game
+Contributor: Lucas Tobalsky
 
-# Contributor: Lucas Tobalsky
+Description:
+This will be the score manager class which will track the players score
 
-#import pygame
+"""
 
 class ScoreManager:
 
