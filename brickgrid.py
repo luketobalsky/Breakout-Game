@@ -1,6 +1,14 @@
-# This will be the brick grid class which manages the layout of the grid
-# Contributor: Luis Orellana
+"""
+Group A: Breakout Game
 
+Contributor: Luis Orellana
+
+Description:
+The following class initializes the brick grid component.
+It contains a method to render the brick grid to the screen.
+It contains a method to check if all brick have been destroyed.
+
+"""
 import pygame
 from brick import Brick
 
@@ -41,7 +49,6 @@ class BrickGrid:
 
     def all_bricks_destroyed(self):
         for brick in self.bricks_array:
-            # If any brick is still active return false
             if brick.active:
                 return False
         return True
