@@ -1,6 +1,5 @@
 """
 Group A: Breakout Game
-
 Contributor: Bianca Fouch
 
 Description:
