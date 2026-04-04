@@ -1,6 +1,15 @@
-#This will be the bricks class with associated mechanics
-# Contributor: Luis Orellana
+"""
+Group A: Breakout Game
 
+Contributor: Luis Orellana
+
+Description:
+The following class initializes the brick component.
+It contains a method to render the brick to the screeen 
+and it contains a method to destroy the brick.
+
+
+"""
 import pygame
 from components import Components
 
