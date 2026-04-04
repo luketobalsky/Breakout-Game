@@ -1,5 +1,11 @@
-#This will be the Components class which serves as the base class for the main components
-#Contributor: Luis Orellana
+"""
+Group A: Breakout Game
+Contributor: Luis Orellana
+
+Description:
+This will be the Components class which serves as the base class for the main components.
+
+"""
 
 # Abstract Base Class module
 from abc import ABC, abstractmethod
