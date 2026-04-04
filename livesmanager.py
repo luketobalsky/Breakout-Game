@@ -1,6 +1,12 @@
-# This will be the lives manager class which will track the players available/used lives
+"""
+Group A: Breakout Game
 
-# Contributor: Lucas Tobalsky
+Contributor: Lucas Tobalsky
+
+Description:
+This will be the lives manager class which will track the players available/used lives
+
+"""
 
 from settings import Settings
 
