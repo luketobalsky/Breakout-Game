@@ -1,6 +1,11 @@
-#This will serve as the main Breakout game launcher.  
+"""
+Group A: Breakout Game
+Contributors: Sida Feng, Baba Diawara, Bianca Fouch, Lucas Tobalsky, Luis Orellana
 
-# Contributor: Lucas Tobalsky
+Description:
+This will serve as the main Breakout game launcher.  
+
+"""
 
 import pygame
 from paddle import Paddle
