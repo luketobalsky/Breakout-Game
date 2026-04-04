@@ -34,30 +34,7 @@ from brick import Brick
 
 
 class Ball(Components):
-    class Ball:
-        """
-        Represents the ball used in the breakout-style game and extends Components.
-
-        The Ball class manages its own position, movement, collision detection,
-        and bounce behavior. It uses a pygame.Rect to track its bounding box
-        and interacts with other game objects such as the Paddle and Bricks.
-
-        Responsibilities:
-        - Maintain the ball's size, position, velocity, and bounding rectangle.
-        - Move each frame and detect collisions with screen boundaries.
-        - Reverse velocity along the appropriate axis when bouncing.
-        - Detect collisions with Paddle and Brick objects and report hits.
-        - Signal a game-over condition when the ball falls below the screen.
-        - Render itself onto the game window.
-
-        Attributes:
-            frame (pygame.Rect): The ball's bounding rectangle.
-            speed_x (int): Horizontal movement speed.
-            speed_y (int): Vertical movement speed.
-            game_over (int): Game state flag (0 = running, -1 = ball lost).
-            collision_side (Settings): records the side of the target hit by the ball
-        """
-
+    
     def __init__(self, x, y):
         super().__init__(x - Settings.RADIUS.value, y,
                          Settings.RADIUS.value * 2, Settings.RADIUS.value * 2)
