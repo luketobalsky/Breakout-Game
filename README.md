@@ -20,7 +20,7 @@ Requirements:
 
 
 Installation:
-git clone <repo-url>.git
+git clone "repo-url".git
 
 Run game:
 1. Open command line or terminal
