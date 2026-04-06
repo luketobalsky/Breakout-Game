@@ -9,7 +9,7 @@ It contains a method to check if all brick have been destroyed.
 
 """
 import pygame
-from brick import Brick
+from game.brick import Brick
 
 
 class BrickGrid:

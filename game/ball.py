@@ -29,10 +29,10 @@ the main game loop to update and draw the ball each rect.
 import pygame
 from pygame import Rect
 
-from components import Components
-from settings import Settings
-from paddle import Paddle
-from brick import Brick
+from game.components import Components
+from game.settings import Settings
+from game.paddle import Paddle
+from game.brick import Brick
 
 
 class Ball(Components):

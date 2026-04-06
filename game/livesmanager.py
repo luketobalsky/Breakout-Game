@@ -8,7 +8,7 @@ This will be the lives manager class which will track the players available/used
 
 """
 
-from settings import Settings
+from game.settings import Settings
 
 class LivesManager:
 
