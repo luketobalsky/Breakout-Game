@@ -15,6 +15,7 @@ def test_initialization():
     assert brick.rect.width == Brick.WIDTH
     assert brick.rect.height == Brick.HEIGHT
 
+
 def test_brick_destroy():
     brick = Brick(10, 10)
     brick.destroy()

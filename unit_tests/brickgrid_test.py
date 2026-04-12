@@ -25,4 +25,3 @@ def test_all_bricks_destroyed_true():
     for brick in brick_grid.bricks_array:
         brick.destroy()
     assert brick_grid.all_bricks_destroyed() is True
-

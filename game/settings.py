@@ -29,15 +29,16 @@ class Settings(Enum):
     RIGHT = 1114
 
     # Ball properties
-    COLLISION_THRESHOLD = 5
+    COLLISION_THRESHOLD = 10
     RADIUS = 10
 
     # Screen dimensions
-    SCREEN_X = 1000
+    SCREEN_X = 600
     SCREEN_Y = 600
 
-    #Lives 
+    # Lives
     LIVES = 3
 
-    #Game Speed (Frames)
+    # Game Speed (Frames)
     FRAMES = 60
+
