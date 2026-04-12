@@ -36,8 +36,7 @@ class Game:
             "game/sounds/CollisionSound.wav")
         self.collision_sound.set_volume(0.2)
 
-        # ball drop sounds
-
+        # ball drop sound
         self.ball_drops_sound = pygame.mixer.Sound("game/sounds/BallDrop.wav")
         self.ball_drops_sound.set_volume(0.2)
 
