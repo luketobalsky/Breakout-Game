@@ -7,7 +7,6 @@ This will serve as the main Breakout game launcher.
 
 """
 
-
 import pygame
 from game.paddle import Paddle
 from game.ball import Ball
@@ -140,7 +139,7 @@ class Game:
 
         # render all game objects
         self.renderer.draw(self.ball, self.paddle, self.brick_grid,
-                           self.livesmanager, self.scoremanager)
+                           self.livesmanager, self.scoremanager, self.levelmanager)
 
     def draw_restart_screen(self):
         self.screen.fill((0, 0, 0))
@@ -241,3 +240,4 @@ class Game:
 if __name__ == "__main__":
     game = Game()
     game.run_game()
+
