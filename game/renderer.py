@@ -19,7 +19,7 @@ class Renderer:
 
     # render components (via componenents draw() )
     # make sure to add components here as needed
-    def draw(self, ball, paddle, brick_grid, livesmanager, scoremanager):
+    def draw(self, ball, paddle, brick_grid, livesmanager, scoremanager, levelmanager):
 
         # text renderer/drawer for pygame
         self.font = pygame.font.SysFont(None, 25)
@@ -38,9 +38,17 @@ class Renderer:
         score = self.font.render(
             "Score: " + str(scoremanager.current_score()), True, "white")
 
+        level = self.font.render(
+            "Level: " + str(levelmanager.get_level()), True, "White")
+
         # place componenets
-        self.screen.blit(lives, (10, 10))
-        self.screen.blit(score, (Settings.SCREEN_X.value - 100, 10))
+        y_placement = Settings.SCREEN_Y.value - 30
+
+        self.screen.blit(lives, (20, y_placement))
+        self.screen.blit(level, ((Settings.SCREEN_X.value /
+                         2)-40, y_placement))
+        self.screen.blit(score, (Settings.SCREEN_X.value -
+                         100, y_placement))
 
         # update screen
         pygame.display.flip()
