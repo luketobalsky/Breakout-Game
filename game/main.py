@@ -8,6 +8,7 @@ This will serve as the main Breakout game launcher.
 """
 
 import pygame
+import os
 from game.paddle import Paddle
 from game.ball import Ball
 from game.brickgrid import BrickGrid
@@ -27,16 +28,17 @@ class Game:
     def __init__(self):
         pygame.init()
 
-        # Load mixer
+        # Load mixer for sounds
         pygame.mixer.init()
 
         # collision sound
         self.collision_sound = pygame.mixer.Sound(
-            "game/sounds/CollisionSound.wav")
+            os.path.join("game", "sounds", "CollisionSound.wav"))
         self.collision_sound.set_volume(0.2)
 
         # ball drop sound
-        self.ball_drops_sound = pygame.mixer.Sound("game/sounds/BallDrop.wav")
+        self.ball_drops_sound = pygame.mixer.Sound(
+            os.path.join("game", "sounds", "BallDrop.wav"))
         self.ball_drops_sound.set_volume(0.2)
 
         # set game window settings
@@ -227,6 +229,7 @@ class Game:
             self.ball.speed_x = 8
             self.ball.speed_y = -8
 
+    # If the ball falls through, the speed at that level is applied
     def apply_ball_level_speed(self):
         level = self.levelmanager.get_level()
         if level == 2:
