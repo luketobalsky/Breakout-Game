@@ -42,6 +42,14 @@ class Game:
             os.path.join("game", "sounds", "BallDrop.wav"))
         self.ball_drops_sound.set_volume(0.2)
 
+        #win sound
+        self.win_sound = pygame.mixer.Sound(os.path.join("game", "sounds", "win.wav"))
+        #self.win_sound.set_volume(0.2)
+
+        #lose sound
+        self.lose_sound = pygame.mixer.Sound(os.path.join("game", "sounds", "lose.wav"))
+        #self.lose_sound.set_volume(0.2)
+
         #difficulty manager
         self.difficulty_manager = DifficultyManager()
 
@@ -140,6 +148,7 @@ class Game:
             # end loop if lives are out
             if self.livesmanager.current_lives() <= 0:
                 self.state = "game_over"
+                self.lose_sound.play()
 
         # check for collisions with paddle
         if self.ball.has_hit(self.paddle) and self.ball.speed_y > 0:
@@ -159,6 +168,7 @@ class Game:
             self.levelmanager.increment_level()
             if self.difficulty_manager.final_level(self.levelmanager.get_level()):
                 self.state = "win"
+                self.win_sound.play()
             else:
                 self.state = "next_level"
 
@@ -244,6 +254,7 @@ class Game:
 
         # draw button
         pygame.draw.rect(self.screen, (0, 128, 255), self.restart_button)
+        pygame.draw.rect(self.screen, (0, 128, 255), self.menu_button)
 
         # button text
         font = pygame.font.Font(None, 30)
