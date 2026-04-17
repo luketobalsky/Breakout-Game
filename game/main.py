@@ -17,6 +17,7 @@ from game.livesmanager import LivesManager
 from game.renderer import Renderer
 from game.settings import Settings
 from game.levelmanager import LevelManager
+from game.difficultymanager import DifficultyManager
 
 # import settings
 x = Settings.SCREEN_X.value
@@ -41,6 +42,9 @@ class Game:
             os.path.join("game", "sounds", "BallDrop.wav"))
         self.ball_drops_sound.set_volume(0.2)
 
+        #difficulty manager
+        self.difficulty_manager = DifficultyManager()
+
         # set game window settings
         pygame.display.set_caption("Breakout-Game")
         self.screen = pygame.display.set_mode((x, y))
@@ -58,11 +62,15 @@ class Game:
         self.renderer = Renderer(self.screen)
 
         # game state
-        self.state = "running"
+        self.state = "main_menu"
 
         # game state buttons
         self.restart_button = pygame.Rect(x // 2 - 50, y // 2 - 25, 100, 50)
         self.continue_button = pygame.Rect(x // 2 - 50, y // 2 - 25, 100, 50)
+        #new for main menu
+        self.start_button = pygame.Rect(x // 2 - 50, y // 2 - 25, 100, 50)
+        self.quit_button = pygame.Rect(x // 2 - 50, y // 2 + 50, 100, 50)
+        self.menu_button = pygame.Rect(x // 2 - 50, y // 2 + 50, 100, 50)
 
     # run game function
 
@@ -77,22 +85,37 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
 
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if self.state == "main_menu":
+                        if self.start_button.collidepoint(event.pos):
+                            self.reset_game()
+                            self.state = "running"
+                        elif self.quit_button.collidepoint(event.pos):
+                            pygame.quit()
                 if self.state == "game_over":
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         if self.restart_button.collidepoint(event.pos):
                             self.reset_game()
                             self.state = "running"
+                        elif self.menu_button.collidepoint(event.pos):
+                            self.state = "main_menu"
                 if self.state == "next_level":
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         if self.continue_button.collidepoint(event.pos):
                             self.setup_level()
                             self.state = "running"
+                        elif self.menu_button.collidepoint(event.pos):
+                            self.state = "main_menu"
                 if self.state == "win":
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         if self.restart_button.collidepoint(event.pos):
                             self.reset_game()
                             self.state = "running"
+                        elif self.menu_button.collidepoint(event.pos):
+                            self.state = "main_menu"
 
+            if self.state == "main_menu":
+                self.draw_main_menu()
             if self.state == "running":
                 self.update_game()
             if self.state == "next_level":
@@ -113,7 +136,7 @@ class Game:
             self.livesmanager.lose_life()
             self.ball_drops_sound.play()
             self.ball = Ball(x // 2, y // 2)
-            self.apply_ball_level_speed()
+            self.difficulty_manager.increase_difficulty(self.ball, self.levelmanager.get_level())
             # end loop if lives are out
             if self.livesmanager.current_lives() <= 0:
                 self.state = "game_over"
@@ -134,7 +157,7 @@ class Game:
 
         if self.brick_grid.all_bricks_destroyed():
             self.levelmanager.increment_level()
-            if self.levelmanager.get_level() > 3:
+            if self.difficulty_manager.final_level(self.levelmanager.get_level()):
                 self.state = "win"
             else:
                 self.state = "next_level"
@@ -143,11 +166,38 @@ class Game:
         self.renderer.draw(self.ball, self.paddle, self.brick_grid,
                            self.livesmanager, self.scoremanager, self.levelmanager)
 
+    def draw_main_menu(self):
+        self.screen.fill((0, 0, 0))
+
+        #buttons
+        pygame.draw.rect(self.screen, (0, 128, 255), self.start_button)
+        pygame.draw.rect(self.screen, (0, 128, 255), self.quit_button)
+
+        #button text
+        font = pygame.font.Font(None, 30)
+        text = font.render("Start", True, (255, 255, 255))
+        text_rect = text.get_rect(center=self.start_button.center)
+        self.screen.blit(text, text_rect)
+        text2 = font.render("Quit", True, (255, 255, 255))
+        text2_rect = text2.get_rect(center=self.quit_button.center)
+        self.screen.blit(text2, text2_rect)
+
+        #title
+        title_font = pygame.font.Font(None, 60)
+        title_text = title_font.render(
+            "Breakout", True, (255, 255, 255))
+        title_rect = title_text.get_rect(center=(x // 2, y // 2 - 80))
+        self.screen.blit(title_text, title_rect)
+
+        pygame.display.flip()
+
+
     def draw_restart_screen(self):
         self.screen.fill((0, 0, 0))
 
         # draw button
         pygame.draw.rect(self.screen, (0, 128, 255), self.restart_button)
+        pygame.draw.rect(self.screen, (0, 128, 255), self.menu_button)
 
         # button text
         font = pygame.font.Font(None, 30)
@@ -155,10 +205,14 @@ class Game:
         text_rect = text.get_rect(center=self.restart_button.center)
         self.screen.blit(text, text_rect)
 
+        #menu screen to this part
+        text2 = font.render("Menu", True, (255, 255, 255))
+        text2_rect = text2.get_rect(center=self.menu_button.center) 
+        self.screen.blit(text2, text2_rect)
+
         # "Game Over" text
         game_over_font = pygame.font.Font(None, 60)
-        game_over_text = game_over_font.render(
-            "Game Over", True, (255, 255, 255))
+        game_over_text = game_over_font.render("Game Over", True, (255, 255, 255))
         game_over_rect = game_over_text.get_rect(center=(x // 2, y // 2 - 80))
         self.screen.blit(game_over_text, game_over_rect)
 
@@ -179,7 +233,7 @@ class Game:
         # "Continue" text
         continue_font = pygame.font.Font(None, 60)
         continue_text = continue_font.render(
-            "Continue to next level?", True, (255, 255, 255))
+            "Next Level", True, (255, 255, 255))
         continue_rect = continue_text.get_rect(center=(x // 2, y // 2 - 80))
         self.screen.blit(continue_text, continue_rect)
 
@@ -197,6 +251,11 @@ class Game:
         text_rect = text.get_rect(center=self.restart_button.center)
         self.screen.blit(text, text_rect)
 
+        #menu screen here too
+        text2 = font.render("Menu", True, (255, 255, 255))
+        text2_rect = text2.get_rect(center=self.menu_button.center) 
+        self.screen.blit(text2, text2_rect)
+
         # "You won" text
         game_over_font = pygame.font.Font(None, 60)
         game_over_text = game_over_font.render(
@@ -213,31 +272,14 @@ class Game:
         self.levelmanager = LevelManager()
         self.setup_level()
 
-    # Level transitions
+    #new level class to manage difficulty
     def setup_level(self):
         self.ball = Ball(x // 2, y // 2)
         self.paddle = Paddle(x, y)
         self.paddle.using_mouse = True
         self.brick_grid = BrickGrid(x)
 
-        level = self.levelmanager.get_level()
-
-        if level == 2:
-            self.ball.speed_x = 6
-            self.ball.speed_y = -6
-        elif level == 3:
-            self.ball.speed_x = 8
-            self.ball.speed_y = -8
-
-    # If the ball falls through, the speed at that level is applied
-    def apply_ball_level_speed(self):
-        level = self.levelmanager.get_level()
-        if level == 2:
-            self.ball.speed_x = 6
-            self.ball.speed_y = -6
-        elif level == 3:
-            self.ball.speed_x = 8
-            self.ball.speed_y = -8
+        self.difficulty_manager.increase_difficulty(self.ball, self.levelmanager.get_level())
 
 
 if __name__ == "__main__":
