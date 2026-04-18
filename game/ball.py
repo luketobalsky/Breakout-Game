@@ -41,8 +41,8 @@ class Ball(Components):
                          Settings.BALL_WIDTH.value, Settings.BALL_HEIGHT.value)
 
         # Movement speed
-        self.speed_x = Settings.BALL_SPEED_X
-        self.speed_y = Settings.BALL_SPEED_Y
+        self.speed_x = Settings.BALL_SPEED_X.value
+        self.speed_y = Settings.BALL_SPEED_Y.value
 
         # Game state
         self.game_over = 0
