@@ -40,7 +40,7 @@ class Paddle(Components):
             Settings.PADDLE_HEIGHT.value
         )
 
-        self.speed = Settings.PADDLE_SPEED
+        self.speed = Settings.PADDLE_SPEED.value
         self.screen_width = Settings.SCREEN_WIDTH.value
 
         # Input states
