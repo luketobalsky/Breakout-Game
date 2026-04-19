@@ -148,6 +148,23 @@ class Ball(Components):
             Settings.RADIUS.value
         )
 
+    def bounce_direction(self, paddle):
+        self.rect.bottom = paddle.rect.top
+
+        #find location of ball compared to the paddle and 
+        center = self.rect.centerx
+        paddle_center = paddle.rect.centerx
+        offset = center - paddle_center
+        intersect = offset / (paddle.width / 2)
+        speed = max(abs(self.speed_y), 4)
+        self.speed_x = int(intersect * speed)
+
+        if abs(self.speed_x) < 2:
+            self.speed_x = 2 if intersect >= 0 else -2
+
+        self.speed_y = -speed
+
+
     # May need to be deleted.
     def update(self):
         pass
