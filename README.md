@@ -25,4 +25,4 @@ git clone "repo-url".git
 Run game:
 1. Open command line or terminal
 2. Cd into the Breakout-Game directory
-3. Once inside correct directory run: python3 -m game.main or python game.main
+3. Once inside correct directory run: python3 -m main or python main
