@@ -23,7 +23,7 @@ Installation:
 git clone "repo-url".git
 
 Run game:
-1. Via code editior:
+1. Via code editor:
    a. run the main class
 2. Via command line:
    a. Open command line/terminal
