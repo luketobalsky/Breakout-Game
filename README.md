@@ -23,6 +23,11 @@ Installation:
 git clone "repo-url".git
 
 Run game:
-1. Open command line or terminal
-2. Cd into the Breakout-Game directory
-3. Once inside correct directory run: python3 -m main or python main
+1. Via code editior:
+   a. run the main class
+2. Via command line:
+   a. Open command line/terminal
+   b. Cd into the Breakout-Game directory
+   c. Once inside correct directory run: python3 -m main or python main
+
+
