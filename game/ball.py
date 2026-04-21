@@ -36,7 +36,7 @@ from game.brick import Brick
 
 
 class Ball(Components):
-    
+
     def __init__(self, x, y):
         super().__init__(x - Settings.RADIUS.value, y,
                          Settings.RADIUS.value * 2, Settings.RADIUS.value * 2)
@@ -59,22 +59,26 @@ class Ball(Components):
             -1 if ball falls below screen (game over)
              0 otherwise
         """
+        # Apply movement
+        self.rect.x += self.speed_x
+        self.rect.y += self.speed_y
 
-        # Bounce off left or right walls
-        if self.rect.left < 0 or self.rect.right > Settings.SCREEN_X.value:
+        # Bounce off left or right walls and ensures the ball does not exceed the boundaries
+        if self.rect.left < 0:
+            self.rect.left = 0
+            self.bounce(Settings.HORIZONTAL)
+        elif self.rect.right > Settings.SCREEN_X.value:
+            self.rect.right = Settings.SCREEN_X.value
             self.bounce(Settings.HORIZONTAL)
 
         # Bounce off top wall
         if self.rect.top < 0:
+            self.rect.top = 0
             self.bounce(Settings.VERTICAL)
 
         # Ball fell below the screen → game over
         if self.rect.bottom > Settings.SCREEN_Y.value:
             self.game_over = -1
-
-        # Apply movement
-        self.rect.x += self.speed_x
-        self.rect.y += self.speed_y
 
         return self.game_over
 
@@ -139,10 +143,29 @@ class Ball(Components):
         pygame.draw.circle(
             screen,
             colour,
-            (self.rect.x + Settings.RADIUS.value, self.rect.y + Settings.RADIUS.value),
+            (self.rect.x + Settings.RADIUS.value,
+             self.rect.y + Settings.RADIUS.value),
             Settings.RADIUS.value
         )
+
+    def bounce_direction(self, paddle):
+        self.rect.bottom = paddle.rect.top
+
+        #find location of ball compared to the paddle and 
+        center = self.rect.centerx
+        paddle_center = paddle.rect.centerx
+        offset = center - paddle_center
+        intersect = offset / (paddle.width / 2)
+        speed = max(abs(self.speed_y), 4)
+        self.speed_x = int(intersect * speed)
+
+        if abs(self.speed_x) < 2:
+            self.speed_x = 2 if intersect >= 0 else -2
+
+        self.speed_y = -speed
+
 
     # May need to be deleted.
     def update(self):
         pass
+
