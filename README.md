@@ -21,6 +21,7 @@ Requirements:
 
 Installation:
 git clone "repo-url".git
+git clone https://github.com/luketobalsky/Breakout-Game.git
 
 Run game:
 1. Via code editor:
