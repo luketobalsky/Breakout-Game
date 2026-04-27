@@ -62,7 +62,7 @@ class Game:
         self.ball = Ball(x // 2, y // 2)
         self.paddle = Paddle(x, y)
         self.brick_grid = BrickGrid(x)
-        # need this from biancas paddle.py, if not working make false to use keyboard or comment out
+
         self.paddle.using_mouse = True
         self.scoremanager = ScoreManager()
         self.livesmanager = LivesManager()

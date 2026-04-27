@@ -3,7 +3,6 @@ Group A: Breakout Game
 Contributor: Baba Diawara
 
 Description:
-
 This module defines the Ball class used in the breakout-style game.
 The Ball is responsible for handling its own movement, detecting
 collisions with game objects (such as the Paddle and Bricks), and
@@ -16,18 +15,9 @@ Key Responsibilities:
 - Reverse velocity along the correct axis when a collision occurs.
 - Report game-over conditions when the ball falls below the screen.
 - Render the ball onto the game window.
-
-The Ball class interacts closely with:
-- Settings: for screen dimensions and direction constants.
-- Paddle: to detect paddle hits and bounce vertically.
-- Brick: to detect brick hits and determine bounce direction.
-
-This module is part of the core gameplay mechanics and is used by
-the main game loop to update and draw the ball each rect.
 """
 
 import pygame
-from pygame import Rect
 
 from game.components import Components
 from game.settings import Settings
@@ -36,17 +26,24 @@ from game.brick import Brick
 
 
 class Ball(Components):
+    """
+    The Ball class interacts closely with:
+    - Settings: for screen dimensions and direction constants.
+    - Paddle: to detect paddle hits and bounce vertically.
+    - Brick: to detect brick hits and determine bounce direction.
 
-    def __init__(self, x, y):
-        super().__init__(x - Settings.RADIUS.value, y,
-                         Settings.RADIUS.value * 2, Settings.RADIUS.value * 2)
+    This module is part of the core gameplay mechanics and is used by
+    the main game loop to update and draw the ball each rect.
+    """
 
-        # Pygame Rect used for movement & collision detection
-        self.rect = Rect(self.x, self.y, self.width, self.height)
+    def __init__(self):
+        super().__init__(Settings.BALL_X.value, Settings.BALL_Y.value,
+                         Settings.BALL_WIDTH.value, Settings.BALL_HEIGHT.value)
 
         # Movement speed
-        self.speed_x = 4
-        self.speed_y = -4
+        self.speed_x = Settings.BALL_SPEED_X.value
+        self.speed_y = Settings.BALL_SPEED_Y.value
+
         # Game state
         self.game_over = 0
         # The side of the item the ball has hit
@@ -67,8 +64,8 @@ class Ball(Components):
         if self.rect.left < 0:
             self.rect.left = 0
             self.bounce(Settings.HORIZONTAL)
-        elif self.rect.right > Settings.SCREEN_X.value:
-            self.rect.right = Settings.SCREEN_X.value
+        elif self.rect.right > Settings.SCREEN_WIDTH.value:
+            self.rect.right = Settings.SCREEN_WIDTH.value
             self.bounce(Settings.HORIZONTAL)
 
         # Bounce off top wall
@@ -77,7 +74,7 @@ class Ball(Components):
             self.bounce(Settings.VERTICAL)
 
         # Ball fell below the screen → game over
-        if self.rect.bottom > Settings.SCREEN_Y.value:
+        if self.rect.bottom > Settings.SCREEN_HEIGHT.value:
             self.game_over = -1
 
         return self.game_over
@@ -136,13 +133,13 @@ class Ball(Components):
 
         return False  # No collision
 
-    def draw(self, screen, colour):
+    def draw(self, screen):
         """
         Draws the ball on the screen.
         """
         pygame.draw.circle(
             screen,
-            colour,
+            (255, 255, 255),
             (self.rect.x + Settings.RADIUS.value,
              self.rect.y + Settings.RADIUS.value),
             Settings.RADIUS.value

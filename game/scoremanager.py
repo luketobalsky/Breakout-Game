@@ -3,24 +3,49 @@ Group A: Breakout Game
 Contributor: Lucas Tobalsky
 
 Description:
-This will be the score manager class which will track the players score
-
+This module defines the ScoreManager class, which tracks the player's score,
+allows points to be added, and resets the score when needed.
 """
 
+
+from game.settings import Settings
+
+
 class ScoreManager:
+    """
+    Manages the player's score throughout the game.
 
-    #create and set initial score to 0
+    Provides methods to add points, retrieve the current score,
+    and reset the score to its initial value.
+    """
+
     def __init__(self):
-        self.score = 0
+        """
+        Initializes the score manager with the starting score
+        defined in Settings.
+        """
+        self.score = Settings.INITIAL_SCORE.value
 
-    #add points to score
     def add(self, points):
+        """
+        Adds the given number of points to the player's score.
+
+        Parameters:
+            points (int): The number of points to add.
+        """
         self.score += points
 
-    #get your current score
     def current_score(self):
+        """
+        Returns the player's current score.
+
+        Returns:
+            int: The current score value.
+        """
         return self.score
-    
-    #clear/reset score to 0
+
     def clear(self):
+        """
+        Resets the player's score back to zero.
+        """
         self.score = 0

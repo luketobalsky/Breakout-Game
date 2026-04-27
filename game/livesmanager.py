@@ -1,30 +1,49 @@
 """
 Group A: Breakout Game
-
 Contributor: Lucas Tobalsky
 
 Description:
-This will be the lives manager class which will track the players available/used lives
-
+This module defines the LivesManager class, which tracks the player's remaining lives,
+handles life loss, and resets lives when starting a new game.
 """
 
 from game.settings import Settings
 
-class LivesManager:
 
-    #create and set lives to starting value
+class LivesManager:
+    """
+    Manages the player's remaining lives.
+
+    Provides methods to decrement lives when the player loses the ball,
+    retrieve the current number of lives, and reset lives to the starting
+    amount defined in Settings.
+    """
+
     def __init__(self):
+        """
+        Initializes the lives manager with the starting number of lives
+        defined in Settings.
+        """
         self.lives = Settings.LIVES.value
 
-    #check if you have lives left and remove one
     def lose_life(self):
+        """
+        Decreases the player's life count by one, if any lives remain.
+        """
         if self.lives > 0:
             self.lives -= 1
 
-    #get your current lives
     def current_lives(self):
+        """
+        Returns the number of lives the player currently has.
+
+        Returns:
+            int: The current life count.
+        """
         return self.lives
-    
-    #clear/reset lives to starting amount
+
     def clear(self):
+        """
+        Resets the player's lives back to the starting amount.
+        """
         self.lives = Settings.LIVES.value

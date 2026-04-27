@@ -1,5 +1,6 @@
 # ----- Unit Test Brick Class -----
 from game.brick import Brick
+from game.settings import Settings
 
 
 def test_initialization():
@@ -12,8 +13,8 @@ def test_initialization():
 
     assert brick.rect.x == 10
     assert brick.rect.y == 20
-    assert brick.rect.width == Brick.WIDTH
-    assert brick.rect.height == Brick.HEIGHT
+    assert brick.rect.width == Settings.BRICK_WIDTH.value
+    assert brick.rect.height == Settings.BRICK_HEIGHT.value
 
 
 def test_brick_destroy():
